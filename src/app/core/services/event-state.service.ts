@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export interface Event {
-  start: number;
-  end: number;
-}
-
 export const INITIAL_STATE = [
   { start: 30, end: 150 },
   { start: 540, end: 600 },
@@ -19,15 +14,15 @@ export const INITIAL_STATE = [
 export class EventStateService {
   constructor() {}
 
-  private initialEvents: Event[] = INITIAL_STATE;
+  private initialEvents: CalenderEvent[] = INITIAL_STATE;
 
-  private eventState = new BehaviorSubject<Event[]>(this.initialEvents);
+  private eventState = new BehaviorSubject<CalenderEvent[]>(this.initialEvents);
 
-  getEvents(): Observable<Event[]> {
+  getEvents(): Observable<CalenderEvent[]> {
     return this.eventState.asObservable();
   }
 
-  setEvents(events: Event[]) {
+  setEvents(events: CalenderEvent[]) {
     this.eventState.next(events);
   }
 

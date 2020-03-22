@@ -6,10 +6,8 @@ import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [LayoutComponent],
-  imports: [
-    BrowserModule,
-  ],
+  imports: [BrowserModule],
   exports: [LayoutComponent],
   providers: [EventStateService],
 })
-export class CoreModule { }
+export class CoreModule {}
