@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { EventStateService } from './services/event-state.service';
 import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
@@ -8,5 +10,6 @@ import { LayoutComponent } from './layout/layout.component';
     BrowserModule,
   ],
   exports: [LayoutComponent],
+  providers: [EventStateService],
 })
 export class CoreModule { }
