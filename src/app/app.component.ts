@@ -8,13 +8,13 @@ import { LayoutStateService } from './core/services/layout-state.service';
 export class AppComponent implements OnInit {
   title = 'ng-single-day-calendar';
 
-  constructor(private layout: LayoutStateService) {}
+  constructor(private layoutState: LayoutStateService) {}
 
   ngOnInit() {
     window.layOutDay = this.layOutDay;
   }
 
-  private layOutDay(events: CalendarEvent[]) {
-    this.layout.setLayout(events);
-  }
+  private layOutDay = (events: CalendarEvent[]) => {
+    this.layoutState.setLayout(events);
+  };
 }
