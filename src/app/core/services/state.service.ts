@@ -11,22 +11,22 @@ export const INITIAL_STATE = [
 @Injectable({
   providedIn: 'root',
 })
-export class EventStateService {
+export class StateService {
   constructor() {}
 
   private initialEvents: CalenderEvent[] = INITIAL_STATE;
 
-  private eventState = new BehaviorSubject<CalenderEvent[]>(this.initialEvents);
+  private state = new BehaviorSubject<CalenderEvent[]>(this.initialEvents);
 
   getEvents(): Observable<CalenderEvent[]> {
-    return this.eventState.asObservable();
+    return this.state.asObservable();
   }
 
   setEvents(events: CalenderEvent[]) {
-    this.eventState.next(events);
+    this.state.next(events);
   }
 
   resetEvents() {
-    this.eventState.next(this.initialEvents);
+    this.state.next(this.initialEvents);
   }
 }

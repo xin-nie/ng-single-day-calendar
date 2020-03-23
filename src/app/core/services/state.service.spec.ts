@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
-import { EventStateService, INITIAL_STATE } from './event-state.service';
+import { StateService, INITIAL_STATE } from './state.service';
 
 describe('EventStateService', () => {
-  let service: EventStateService;
+  let service: StateService;
   let events: CalenderEvent[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(EventStateService);
+    service = TestBed.inject(StateService);
     service.getEvents().subscribe((res) => (events = res));
   });
 
