@@ -1,8 +1,8 @@
 interface Window {
-  layOutDay: (events: CalenderEvent[]) => void;
+  layOutDay: (events: CalendarEvent[]) => void;
 }
 
-interface CalenderEvent {
+interface CalendarEvent {
   start: number;
   end: number;
 }

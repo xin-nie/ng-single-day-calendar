@@ -4,7 +4,7 @@ import { LayoutStateService } from './layout-state.service';
 
 describe('LayoutStateService', () => {
   let service: LayoutStateService;
-  let layoutState: CalenderEvent[][][];
+  let layoutState: CalendarEvent[][][];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

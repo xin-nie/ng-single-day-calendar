@@ -4,15 +4,15 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LayoutHelperService {
-  buildLayoutState(events: CalenderEvent[]) {
+  buildLayoutState(events: CalendarEvent[]) {
     const groups = this.groupConflictEvents(events);
     return groups.map((group) => this.layoutGroupByColumns(group));
   }
 
-  private groupConflictEvents(events: CalenderEvent[]) {
-    let group: CalenderEvent[] = [];
+  private groupConflictEvents(events: CalendarEvent[]) {
+    let group: CalendarEvent[] = [];
     let groupEnd = -1;
-    return this.sortEvents(events).reduce<CalenderEvent[][]>(
+    return this.sortEvents(events).reduce<CalendarEvent[][]>(
       (groups, event) => {
         // event belongs to a new group if starts after the the group end
         if (groupEnd < event.start) {
@@ -32,8 +32,8 @@ export class LayoutHelperService {
     );
   }
 
-  private layoutGroupByColumns(group: CalenderEvent[]) {
-    return group.reduce<CalenderEvent[][]>((columns, event) => {
+  private layoutGroupByColumns(group: CalendarEvent[]) {
+    return group.reduce<CalendarEvent[][]>((columns, event) => {
       const insertableColumn = columns.find(
         (col) => !this.hasTimeConflict(col[col.length - 1], event)
       );
@@ -42,11 +42,11 @@ export class LayoutHelperService {
     }, []);
   }
 
-  private sortEvents(events: CalenderEvent[]) {
+  private sortEvents(events: CalendarEvent[]) {
     return [...events].sort((a, b) => a.start - b.start || a.end - b.end);
   }
 
-  private hasTimeConflict(a: CalenderEvent, b: CalenderEvent) {
+  private hasTimeConflict(a: CalendarEvent, b: CalendarEvent) {
     return a.end > b.start && a.start < b.end;
   }
 }

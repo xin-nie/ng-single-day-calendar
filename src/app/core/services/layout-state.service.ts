@@ -25,7 +25,7 @@ export class LayoutStateService {
     return this.layout.asObservable();
   }
 
-  setLayout(events: CalenderEvent[]) {
+  setLayout(events: CalendarEvent[]) {
     const layout = this.layoutHelperService.buildLayoutState(events);
     this.layout.next(layout);
   }
