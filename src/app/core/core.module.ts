@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { EventsStoreService } from '../services/events-store.service';
+import { LayoutStateService } from '../services/layout-state.service';
 import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [LayoutComponent],
   imports: [BrowserModule],
   exports: [LayoutComponent],
-  providers: [EventsStoreService],
+  providers: [LayoutStateService],
 })
 export class CoreModule {}
