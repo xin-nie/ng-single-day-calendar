@@ -1,12 +1,22 @@
-.ng-calendar__app-container {
+.ng-calendar__layout-wrapper {
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: center;
 }
 
-.ng-calendar__app {
-  background-color: var(--light-gray);
+.ng-calendar__layout {
+  display: grid;
+  grid-template-columns: 80px 620px;
   height: 720px;
+}
+
+.ng-calendar__layout-aside {
+  height: 100%;
+}
+
+.ng-calendar__layout-main {
+  background-color: var(--light-gray);
+  height: 100%;
   width: 620px;
 }
