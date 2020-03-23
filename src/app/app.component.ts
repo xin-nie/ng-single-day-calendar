@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LayoutStateService } from './services/layout-state.service';
+import { LayoutStateService } from './core/services/layout-state.service';
 
 @Component({
   selector: 'app-root',

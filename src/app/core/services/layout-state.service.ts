@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { groupConflictEvents } from '../helpers/group-conflict-events';
-import { layoutGroupByColumns } from '../helpers/layout-group-by-columns';
+import { groupConflictEvents } from '../../helpers/group-conflict-events';
+import { layoutGroupByColumns } from '../../helpers/layout-group-by-columns';
 
 export const INITIAL_EVENTS = [
   { start: 30, end: 150 },

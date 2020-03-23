@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { LayoutStateService } from '../services/layout-state.service';
+import { LayoutStateService } from './services/layout-state.service';
 import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
