@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { StateService } from './core/services/state.service';
+import { EventsStoreService } from './services/events-store.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { StateService } from './core/services/state.service';
 export class AppComponent implements OnInit {
   title = 'ng-single-day-calendar';
 
-  constructor(private stateService: StateService) {}
+  constructor(private stateService: EventsStoreService) {}
 
   ngOnInit() {
     window.layOutDay = this.layOutDay;

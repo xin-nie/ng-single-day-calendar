@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StateService, INITIAL_STATE } from './state.service';
+import { EventsStoreService, INITIAL_EVENTS } from './events-store.service';
 
-describe('EventStateService', () => {
-  let service: StateService;
+describe('EventsStoreService', () => {
+  let service: EventsStoreService;
   let events: CalenderEvent[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(StateService);
+    service = TestBed.inject(EventsStoreService);
     service.getEvents().subscribe((res) => (events = res));
   });
 
@@ -17,19 +17,12 @@ describe('EventStateService', () => {
   });
 
   it('should return initial state', () => {
-    expect(events).toEqual(INITIAL_STATE);
+    expect(events).toEqual(INITIAL_EVENTS);
   });
 
   it('should set state', () => {
     const newsEvents = [{ start: 30, end: 60 }];
     service.setEvents(newsEvents);
     expect(events).toEqual(events);
-  });
-
-  it('should reset state', () => {
-    const newEvents = [{ start: 30, end: 60 }];
-    service.setEvents(newEvents);
-    service.resetEvents();
-    expect(events).toEqual(INITIAL_STATE);
   });
 });
