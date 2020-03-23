@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~normalize.css/normalize.css';
+
+html,
+body {
+  height: 100%;
+}
+
+:root {
+  --gray: #a5a8ab;
+  --light-gray: #e6e7e8;
+  --teal: #02e2ee;
+}
