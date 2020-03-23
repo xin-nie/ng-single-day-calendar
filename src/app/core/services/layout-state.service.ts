@@ -19,14 +19,14 @@ export class LayoutStateService {
   private initialLayout = this.layoutHelperService.getLayoutState(
     INITIAL_EVENTS
   );
-  private layout = new BehaviorSubject(this.initialLayout);
+  private state = new BehaviorSubject(this.initialLayout);
 
   getLayout() {
-    return this.layout.asObservable();
+    return this.state.asObservable();
   }
 
   setLayout(events: CalendarEvent[]) {
     const layout = this.layoutHelperService.getLayoutState(events);
-    this.layout.next(layout);
+    this.state.next(layout);
   }
 }
