@@ -4,7 +4,7 @@ import { LayoutStateService } from './layout-state.service';
 
 describe('LayoutStateService', () => {
   let service: LayoutStateService;
-  let layoutState: CalendarEvent[][][];
+  let layoutState: EventLayout[];
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -17,15 +17,12 @@ describe('LayoutStateService', () => {
   });
 
   it('should rerturn initial events layout', () => {
-    expect(layoutState).toEqual([
-      [[{ start: 30, end: 150 }]],
-      [
-        [
-          { start: 540, end: 600 },
-          { start: 610, end: 670 },
-        ],
-        [{ start: 560, end: 620 }],
-      ],
-    ]);
+    const eventLayouts = [
+      { top: '30px', width: '594px', height: '120px', left: '0%' },
+      { top: '540px', width: '294px', height: '60px', left: '0%' },
+      { top: '610px', width: '294px', height: '60px', left: '0%' },
+      { top: '560px', width: '294px', height: '60px', left: '50%' },
+    ];
+    expect(layoutState).toEqual(eventLayouts);
   });
 });

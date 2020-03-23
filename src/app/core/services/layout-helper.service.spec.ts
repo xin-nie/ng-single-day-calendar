@@ -14,23 +14,19 @@ describe('LayoutHelperService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return layout by conflict group', () => {
+  it('should return layout object for each events', () => {
     const events = [
       { start: 30, end: 150 },
       { start: 540, end: 600 },
       { start: 560, end: 620 },
       { start: 610, end: 670 },
     ];
-    const expectLayout = [
-      [[{ start: 30, end: 150 }]],
-      [
-        [
-          { start: 540, end: 600 },
-          { start: 610, end: 670 },
-        ],
-        [{ start: 560, end: 620 }],
-      ],
+    const eventLayouts = [
+      { top: '30px', width: '594px', height: '120px', left: '0%' },
+      { top: '540px', width: '294px', height: '60px', left: '0%' },
+      { top: '610px', width: '294px', height: '60px', left: '0%' },
+      { top: '560px', width: '294px', height: '60px', left: '50%' },
     ];
-    expect(service.buildLayoutState(events)).toEqual(expectLayout);
+    expect(service.getLayoutState(events)).toEqual(eventLayouts);
   });
 });

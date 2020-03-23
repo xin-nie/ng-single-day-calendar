@@ -16,7 +16,7 @@ export const INITIAL_EVENTS = [
 export class LayoutStateService {
   constructor(private layoutHelperService: LayoutHelperService) {}
 
-  private initialLayout = this.layoutHelperService.buildLayoutState(
+  private initialLayout = this.layoutHelperService.getLayoutState(
     INITIAL_EVENTS
   );
   private layout = new BehaviorSubject(this.initialLayout);
@@ -26,7 +26,7 @@ export class LayoutStateService {
   }
 
   setLayout(events: CalendarEvent[]) {
-    const layout = this.layoutHelperService.buildLayoutState(events);
+    const layout = this.layoutHelperService.getLayoutState(events);
     this.layout.next(layout);
   }
 }

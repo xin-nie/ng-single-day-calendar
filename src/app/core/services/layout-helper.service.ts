@@ -4,35 +4,45 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class LayoutHelperService {
-  buildLayoutState(events: CalendarEvent[]) {
-    const groups = this.groupConflictEvents(events);
-    return groups.map((group) => this.layoutGroupByColumns(group));
-  }
+  // 1. find conflict events group
+  // 2. place events to columns
+  // 3. build layout object base on columns structure
+  getLayoutState(events: CalendarEvent[]) {
+    const layoutState = [];
+    const sortedEvents = this.sortEvents(events);
 
-  private groupConflictEvents(events: CalendarEvent[]) {
     let group: CalendarEvent[] = [];
     let groupEnd = -1;
-    return this.sortEvents(events).reduce<CalendarEvent[][]>(
-      (groups, event) => {
-        // event belongs to a new group if starts after the the group end
-        if (groupEnd < event.start) {
-          group = [];
-          groups.push(group);
-        }
-        // event belongs to current group if starts before the group end
-        group.push(event);
+    for (const event of sortedEvents) {
+      // a new group starts when event starts after the the group end
+      if (event.start > groupEnd) {
+        const groupEventLayouts = this.getGroupEventLayouts(group);
+        layoutState.push(...groupEventLayouts);
+        group = [];
+      }
 
-        if (event.end > groupEnd) {
-          groupEnd = event.end;
-        }
+      group.push(event);
 
-        return groups;
-      },
-      []
-    );
+      if (event.end > groupEnd) {
+        groupEnd = event.end;
+      }
+    }
+
+    if (group.length > 0) {
+      const groupEventLayouts = this.getGroupEventLayouts(group);
+      layoutState.push(...groupEventLayouts);
+    }
+
+    return layoutState;
   }
 
-  private layoutGroupByColumns(group: CalendarEvent[]) {
+  private getGroupEventLayouts(group: CalendarEvent[]) {
+    const columns = this.placeGroupToColumns(group);
+    return this.buildEventLayouts(columns);
+  }
+
+  // place events to left most column possible
+  private placeGroupToColumns(group: CalendarEvent[]) {
     return group.reduce<CalendarEvent[][]>((columns, event) => {
       const insertableColumn = columns.find(
         (col) => !this.hasTimeConflict(col[col.length - 1], event)
@@ -40,6 +50,28 @@ export class LayoutHelperService {
       insertableColumn ? insertableColumn.push(event) : columns.push([event]);
       return columns;
     }, []);
+  }
+
+  private buildEventLayouts(columns: CalendarEvent[][]) {
+    const APP_WIDTH = 600;
+    const BORDER_WITDH = 6;
+
+    const eventLayouts: EventLayout[] = [];
+
+    const numCols = columns.length;
+    const width = `${APP_WIDTH / numCols - BORDER_WITDH}px`;
+
+    for (const [index, column] of columns.entries()) {
+      for (const event of column) {
+        const { start, end } = event;
+        const height = `${end - start}px`;
+        const left = `${(index / numCols) * 100}%`;
+        const top = `${start}px`;
+        eventLayouts.push({ height, left, top, width });
+      }
+    }
+
+    return eventLayouts;
   }
 
   private sortEvents(events: CalendarEvent[]) {
