@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./calendar.component.css'],
 })
 export class CalendarComponent implements OnInit {
-  @Input() layout: CalendarEvent[][][];
+  @Input() layout: EventLayout[];
 
   constructor() {}
 

@@ -1,1 +1,11 @@
-<p>events works!</p>
+<div class="ng-calendar__calendar">
+  <ng-container *ngFor="let eventLayout of layout">
+    <div
+      class="ng-calendar__calendar-event"
+      [style.top]="eventLayout.top"
+      [style.width]="eventLayout.width"
+      [style.height]="eventLayout.height"
+      [style.left]="eventLayout.left"
+    ></div>
+  </ng-container>
+</div>

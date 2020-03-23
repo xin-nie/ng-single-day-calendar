@@ -13,7 +13,7 @@ export class TimelineComponent {
   timeSlots = this.buildTimeSlots();
 
   private buildTimeSlots() {
-    return Array((TIMELINE_END - TIMELINE_START) / TIMELINE_STEP)
+    return Array((TIMELINE_END - TIMELINE_START) / TIMELINE_STEP + 1)
       .fill(TIMELINE_START)
       .map<number>((x, idx) => x + idx * TIMELINE_STEP);
   }
