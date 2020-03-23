@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+// hard coded layout metadata
+const APP_WIDTH = 600;
+const EVENT_BORDER_WITDH = 6;
+
 @Injectable({
   providedIn: 'root',
 })
@@ -53,13 +57,10 @@ export class LayoutHelperService {
   }
 
   private buildEventLayouts(columns: CalendarEvent[][]) {
-    const APP_WIDTH = 600;
-    const BORDER_WITDH = 6;
-
     const eventLayouts: EventLayout[] = [];
 
     const numCols = columns.length;
-    const width = `${APP_WIDTH / numCols - BORDER_WITDH}px`;
+    const width = `${APP_WIDTH / numCols - EVENT_BORDER_WITDH}px`;
 
     for (const [index, column] of columns.entries()) {
       for (const event of column) {
