@@ -18,5 +18,5 @@
 .ng-calendar__layout-main {
   background-color: var(--light-gray);
   height: 100%;
-  width: 620px;
+  padding: 0 10px;
 }
