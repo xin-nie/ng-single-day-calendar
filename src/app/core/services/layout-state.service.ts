@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { groupConflictEvents } from '../../helpers/group-conflict-events';
-import { layoutGroupByColumns } from '../../helpers/layout-group-by-columns';
+import { LayoutHelperService } from './layout-helper.service';
 
 export const INITIAL_EVENTS = [
   { start: 30, end: 150 },
@@ -15,7 +14,11 @@ export const INITIAL_EVENTS = [
   providedIn: 'root',
 })
 export class LayoutStateService {
-  private initialLayout = this.buildLayoutState(INITIAL_EVENTS);
+  constructor(private layoutHelperService: LayoutHelperService) {}
+
+  private initialLayout = this.layoutHelperService.buildLayoutState(
+    INITIAL_EVENTS
+  );
   private layout = new BehaviorSubject(this.initialLayout);
 
   getLayout() {
@@ -23,12 +26,7 @@ export class LayoutStateService {
   }
 
   setLayout(events: CalenderEvent[]) {
-    const layout = this.buildLayoutState(events);
+    const layout = this.layoutHelperService.buildLayoutState(events);
     this.layout.next(layout);
-  }
-
-  private buildLayoutState(events: CalenderEvent[]) {
-    const groups = groupConflictEvents(events);
-    return groups.map((group) => layoutGroupByColumns(group));
   }
 }

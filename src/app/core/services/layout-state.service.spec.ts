@@ -16,7 +16,7 @@ describe('LayoutStateService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('returns initial events layout', () => {
+  it('should rerturn initial events layout', () => {
     expect(layoutState).toEqual([
       [[{ start: 30, end: 150 }]],
       [
