@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { TimelineModule } from '../features/timeline/timeline.module';
 
 import { LayoutStateService } from './services/layout-state.service';
 
 import { LayoutComponent } from './layout/layout.component';
-import { TimelineComponent } from '../features/timeline/timeline.component';
 
 @NgModule({
-  declarations: [LayoutComponent, TimelineComponent],
-  imports: [BrowserModule],
+  declarations: [LayoutComponent],
+  imports: [BrowserModule, TimelineModule],
   exports: [LayoutComponent],
   providers: [LayoutStateService],
 })
