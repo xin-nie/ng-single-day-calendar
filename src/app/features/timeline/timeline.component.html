@@ -1,8 +1,12 @@
 <div class="ng-calendar__timeline">
   <ng-container *ngFor="let timeSlot of timeSlots">
-    <div>
-      <span>{{ timeSlot | time }}</span>
-      <span>{{ timeSlot | period }}</span>
+    <div class="ng-calendar__timeline-slot">
+      <span class="ng-calendar__timeline-slot-time">
+        {{ timeSlot | time }}
+      </span>
+      <span class="ng-calendar__timeline-slot-period">
+        {{ timeSlot | period }}
+      </span>
     </div>
   </ng-container>
 </div>

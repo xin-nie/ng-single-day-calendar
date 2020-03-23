@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 const TIMELINE_START = 0;
 const TIMELINE_END = 720;
@@ -9,14 +9,12 @@ const TIMELINE_STEP = 30;
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.css'],
 })
-export class TimelineComponent implements OnInit {
-  constructor() {}
+export class TimelineComponent {
+  timeSlots = this.buildTimeSlots();
 
-  ngOnInit(): void {}
-
-  get timeSlots() {
+  private buildTimeSlots() {
     return Array((TIMELINE_END - TIMELINE_START) / TIMELINE_STEP)
       .fill(TIMELINE_START)
-      .map((x, idx) => x + idx * TIMELINE_STEP);
+      .map<number>((x, idx) => x + idx * TIMELINE_STEP);
   }
 }
