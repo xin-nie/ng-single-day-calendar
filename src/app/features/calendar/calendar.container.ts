@@ -8,7 +8,7 @@ import { LayoutStateService } from '../../core/services/layout-state.service';
   templateUrl: './calendar.container.html',
 })
 export class CalendarContainerComponent implements OnInit, OnDestroy {
-  currentLayout: CalendarEvent[][][];
+  currentLayout: EventLayout[][][];
   subscription: Subscription;
 
   constructor(private layout: LayoutStateService) {}
