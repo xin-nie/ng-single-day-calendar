@@ -60,14 +60,23 @@ export class LayoutHelperService {
     const eventLayouts: EventLayout[] = [];
 
     const numCols = columns.length;
-    const width = `${APP_WIDTH / numCols - EVENT_BORDER_WITDH}px`;
-
     for (const [index, column] of columns.entries()) {
       for (const event of column) {
         const { start, end } = event;
-        const height = `${end - start}px`;
-        const left = `${(index / numCols) * 100}%`;
         const top = `${start}px`;
+        const height = `${end - start}px`;
+
+        const left = `${(index / numCols) * 100}%`;
+
+        const rightSideColumns = columns.slice(index + 1);
+        const columnSpan = this.getColumnSpan(
+          event,
+          rightSideColumns
+        );
+        const width = `${
+          (APP_WIDTH / numCols) * columnSpan - EVENT_BORDER_WITDH
+        }px`;
+
         eventLayouts.push({ height, left, top, width });
       }
     }
@@ -76,10 +85,27 @@ export class LayoutHelperService {
   }
 
   private sortEvents(events: CalendarEvent[]) {
-    return [...events].sort((a, b) => a.start - b.start || a.end - b.end);
+    return [...events].sort((a, b) => a.start - b.start);
   }
 
   private hasTimeConflict(a: CalendarEvent, b: CalendarEvent) {
     return a.end > b.start && a.start < b.end;
+  }
+
+  // search right side columns and count cols has no conflict event
+  private getColumnSpan(
+    eventToSpan: CalendarEvent,
+    rightSideColumns: CalendarEvent[][]
+  ) {
+    let columnSpan = 1; // at least current column
+    for (const column of rightSideColumns) {
+      for (const event of column) {
+        if (this.hasTimeConflict(eventToSpan, event)) {
+          return columnSpan;
+        }
+      }
+      columnSpan += 1;
+    }
+    return columnSpan;
   }
 }
